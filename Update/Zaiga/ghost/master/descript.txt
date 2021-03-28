@@ -1,0 +1,15 @@
+charset,Shift_JIS
+
+name,Zaiga
+type,ghost
+
+sakura.name,Zaiga
+kero.name,NA
+
+sstp.allowunspecifiedsend,1
+
+icon,icon.ico
+
+shiori,yaya.dll
+
+craftman,GrayArea and this is sausage to me

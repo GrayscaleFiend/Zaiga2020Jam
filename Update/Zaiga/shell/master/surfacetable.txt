@@ -1,0 +1,75 @@
+charset,Shift_JIS
+version,1
+
+
+//Notes:
+//Seems to be the part that keeps them from being surfaces in surfaces.txt
+group,__disabled
+{
+	//Neutral blinking 
+	1001,_parts
+	1002,_parts
+	1003,_parts
+	
+	//Annoyed blinking
+	1101,_parts
+	1102,_parts
+	1103,_parts
+	
+	//Calm blinking
+	1201,_parts
+	1202,_parts
+	1203,_parts
+	
+	//0200,_parts
+	
+	//Annoyed brow
+	//1100,_parts
+	
+	//Confusion pattern
+	9998,_parts
+
+
+	//annoyed tail
+	0300,_parts
+	0301,_parts
+	0302,_parts
+	0303,_parts
+	0304,_parts
+	
+	//calm tail
+	0400,_parts
+	0401,_parts
+	0402,_parts
+	0403,_parts
+	
+	//base reinforcements. take the things that matter into your own hands. 
+	0101,_parts
+	0100,_parts
+	0102,_parts
+	
+	
+}
+
+
+group,Zaiga
+{
+	scope,0
+	
+	0,default
+	1,annoyed
+	2,calm
+	3,a
+	4,b
+	5,c
+	6,d
+	7,e
+}
+
+group,NA
+{
+	scope,1
+	
+	10,‘f
+	11,™‰–Ú
+}

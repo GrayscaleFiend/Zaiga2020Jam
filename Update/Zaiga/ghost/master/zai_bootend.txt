@@ -1,0 +1,174 @@
+//******************************************************************************
+// YAYA　ゴーストテンプレート
+// 起動/終了トーク辞書
+//******************************************************************************
+
+//******************************************************************************
+//初回起動 OnFirstBoot
+//******************************************************************************
+
+OnFirstBoot
+{
+	//---- 変数の初期化
+	username         = "User"
+	teachusername    = 0	// For remembering user names
+	emotion = 0
+	affection = 5
+	giftsthissession = 0
+	pronounstaught = 0
+	cameragiven = 0
+	timeup = 0
+
+	//---- Vanish-- Watch the count to determine if it's true first time or not
+	if reference[0] == 0
+	{
+		//---- It's really the first launch.
+		"\0\s[0]Wh-What happened??\w4 Where am-\nWho are-- What is--? \n\w4…\w4…?\nAhh.. Ah. I see..\w4 Of course./e"
+	}
+	else
+	{
+		//---- First launch after reinstallation
+		if reference[0] >= 1
+		{
+			//vanished formerly
+			"\0\s[0]*(She looks very confused for a second, then unamused.)\e"
+		}
+
+	}
+}
+
+
+//******************************************************************************
+//Normal startup-- OnBoot
+//******************************************************************************
+
+OnBoot
+{
+	//---- First, set up the base
+	"\s[0]"
+	--
+	if affection < -10{
+		emotion = 1
+	}else{
+		emotion = 0
+	}
+	giftsthissession = 0
+	asleep = 0
+	timeup = 0
+	concerned = 0
+	basics = 0
+	--
+	//---- Check the boot time and change greetings
+	_timeslot = GetTimeSlot
+	
+	case _timeslot{
+	when "Morning"
+	{
+		"\0\s[0]\w5.\w5.\w5.Good morning, human.\e"
+		"\0\s[0]*(She mutters something about unfinished coffee.)\e"
+	}
+	when "Noon"
+	{
+		"\0\s[0]Eaten yet, human?\e"
+		"\0\s[0]In the middle of my lunch...\e"
+
+	}
+	when "Daytime"
+	{
+		"\0\s[0]Here again?\e"
+		"\0\s[0]*(She sighs.)\e"
+		"\0\s[0]I was about to take a nap, but this is fine.\e"
+	}
+	when "Night"
+	{
+		"\0\s[1]I was about to start working. What do you want, human?\e"
+		"\0\s[1]*(She sighs and mutters something about losing time.)\nWill this take long?\e"
+	}
+	others
+	{
+		//For other times-- must be midnight
+		"\0\s[1]I was working... What do you want?\e"
+		"\0\s[0]I use these hours to get my work done, but I suppose it’s time I now need to be spending with you.\e"
+		"\0\s[1].. I was working with-- Ugh. Fine.\e"
+	}
+	}//case
+}
+
+//------------------------------------------------------------------------------
+//Function to comprehensively examine Morning/Noon/Night etc.
+//------------------------------------------------------------------------------
+GetTimeSlot
+{
+	case hour{
+	when 0,1,2,3,4 {'Midnight'}
+	when 5,6,7,8,9,10,11 {'Morning'}
+	when 12,13,14 {'Noon'}
+	when 15,16,17,18,19 {'Daytime'}
+	when 20,21,22,23 {'Night'}
+	}//caseend
+}
+
+
+//******************************************************************************
+//終了 OnClose
+//******************************************************************************
+
+OnClose
+{
+	"\0"
+	--
+	//Don't put \e on this part!
+	if timeup <= 5{
+	
+		"\0*(She looks relieved.)"
+		"\0That was fast. Call me by accident?"
+	
+	
+	}else{
+		_timeslot = GetTimeSlot
+		if _timeslot == "Morning"
+		{
+			if timeup >= 180{
+				"\0\s[0]Did you sleep at all last night?"
+			}
+				"\0\s[0]Finally.. Maybe there’s some coffee waiting for me at home."
+				"\0\s[2]\i[10]Ah, I can eat breakfast now."
+			
+		}
+		elseif _timeslot == "Noon"
+		{
+			//---- End of day			
+			"\0\s[0]Ah, I can eat lunch now..."
+			"\0\s[2]\i[10]Right on time for my favourite meal of the day..."
+			
+		}elseif _timeslot == "Daytime"{
+		
+			"\0\s[0]*(She sighs deeply and seems happy to go.)"
+			"\0\s[0]Maybe I’ll be able to get a nap in before I need to get back to work."
+		
+		}
+		elseif _timeslot == "Night"
+		{
+			"\0\s[0]Good night, %(username)."
+			"\0\s[0]*(She’s muttering again..)\n\nI have a chance to get a head start on my work now.."
+		}
+		else
+		{
+			//---- End of Night/Late Night
+			"\0\s[0]I can get some work done now, finally."
+			"\0\s[0]Heading to bed now, human?"
+		}
+	}
+	--
+	"\w9\w9\-\e"
+}
+
+
+//******************************************************************************
+//Return OnWindowStateRestore from minimized
+//******************************************************************************
+
+OnWindowStateRestore
+{
+	"\0\s[0]*(She has a bit of a start.)\nAh---! That was.. jarring.\e"
+}
