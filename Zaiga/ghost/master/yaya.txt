@@ -1,0 +1,35 @@
+//******************************************************************************
+// 文　ゴーストテンプレート
+// yaya.txt (設定ファイル)
+// original written by umeici.
+// change by yaya develop team.
+//******************************************************************************
+
+//------------------------------------------------------------------------------
+//システム辞書
+//------------------------------------------------------------------------------
+include, system_config.txt		// YAYA:設定辞書。必ず最初に指定すること。
+
+//------------------------------------------------------------------------------
+//以下は紺野ややめのテンプレート
+//------------------------------------------------------------------------------
+dic, zai_tmpl_util.txt		// テンプレート共通処理
+
+dic, zai_word.txt 			// word dictionary
+dic, zai_string.txt 		// string resource dictionary
+dic, zai_aitalk.txt 		// random talk dictionary
+dic, zai_bootend.txt		 // Start / end talk dictionary
+dic, zai_change.txt		    // switch talk dictionary
+dic, zai_communicate.txt	 // communication dictionary
+dic, zai_mouse.txt 		    // Mouse input related dictionary
+dic, zai_menu.txt 			// menu processing dictionary
+dic, zai_etc.txt 			// various event dictionaries
+
+//------------------------------------------------------------------------------
+//セーブファイル暗号化
+// onにするとセーブファイルを暗号化します。
+// 【注意】一度onにするとoffにしてもセーブファイルを削除するまで
+// 暗号化のままになります！
+//------------------------------------------------------------------------------
+// save.encode,on
+

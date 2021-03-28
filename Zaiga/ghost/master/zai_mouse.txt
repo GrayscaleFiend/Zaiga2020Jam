@@ -1,0 +1,139 @@
+//******************************************************************************
+// Yaya ghost template
+// Mouse input related dictionary
+//******************************************************************************
+
+
+//******************************************************************************
+// Mouse processing
+//
+// Describe the actual talk below.The function name has the following rules:
+//[Type] + [scope] + [site]
+//If you want to change the value of a property, you can set the value of the property to the value of the property you want to use.
+//Scope is the scope number\0,\1,and so on.
+// Site represents which part of the hit judgment.In case of an event where there is no hit determination
+//There are no / sites.
+//******************************************************************************
+
+
+//******************************************************************************
+//•‚Å”½‰ž
+//******************************************************************************
+MouseMove0Head
+{
+	if affection > AFFECTIONCAP/10{
+		"\0\s[0]*(She sighs, but doesnft reject the pet.)"
+		"\0\s[0]I donft understand why youfre so intent on this gesture."
+		"\0\s[0]Ifve never been one to enjoy physical affection, but if you want to pet me so badly, I canft stop you."
+		"\0\s[0]*(Shefs sighing, but doesnft seem to hate it.)"
+		"\0\s[2]I doubt Ifm ever going to understand why you like petting me so much."
+		--
+		affection += 2
+	}else{
+		"\0\s[1].. Seriously?\e"
+		"\0\s[1]Why are you petting me?\e"
+		"\0\s[1]Do you do this to everyone you meet?\e"
+		"\0\s[0]Why..?"
+		"\0\s[2]*(She sighs)\e"
+		"\0\s[1]\i[10]Ifd prefer if you didnft touch me.\e"
+	
+	}
+	
+}
+
+
+MouseMove0Face
+{
+	"\0\s[0]Are you... petting my face?\e"
+	"\0\s[0]Don't do that.\e"
+}
+//******************************************************************************
+//‚Â‚Â‚©‚ê”½‰ž
+//******************************************************************************
+
+
+
+MouseDoubleClick0Face
+{
+	"\0\s[1]\i[10]!!!\nc"
+	"\0\s[1]\i[10]..."
+	"\0\s[1]\i[10]*(You canft tell if the hit hurt her or not and that bothers you.)"
+	"\0\s[1]\i[10]*(She makes a small pained noise.)\w4\n\n*(Are you proud of yourself?)"
+	--
+	affection-= 10
+	--
+	"\e"
+}
+
+MouseMove0Tail{
+	"\0\s[1]\i[10]Why would you think Ifd be okay with that? Itfs an incredibly rude thing to do."
+	"\0\s[1]\i[10]Stop that."
+	"\0\s[1]\i[10]Donft touch my tail, itfs unpleasant and inappropriate."
+	--
+	affection-=2
+	--
+	"\e"
+
+}
+
+MouseDoubleClick0Tail{
+	"\0\s[1]\i[10]*(Shefs so offended she canft even think to say anything..)"
+	"\0\s[1]\i[10]!!!\n\n*(Shefs glaring at you.)\n\nIn what world is that behaviour considered acceptable?"
+	"\0\s[1]\i[10]I can tell wefre not going to get along."
+	"\0\s[1]\i[10]*(Shefs not going to humour you and say anything.)"
+	"\0\s[1]\i[10]...\e"
+	"\0\[1]\i[10]*(Her tail twitches. You ask her if that hurt, but she just glares at you.)"
+	--
+	affection-=5
+	--
+	"\e"
+
+}
+
+
+MouseDoubleClick0
+{
+	//ŠçˆÈŠO‚Ì‚Â‚Â‚«‚Åƒƒjƒ…[“WŠJ
+	OpenMenu
+}
+
+//kero‘¤‚Ì‚Â‚Â‚©‚ê”½‰ž
+MouseDoubleClick1
+{
+	//kero‘¤‚Ì‚Â‚Â‚©‚êˆ—
+	"\0\s[0]How did you even click a kero that doesn't exist?\e"
+}
+
+//******************************************************************************
+//ƒ}ƒEƒXˆ—•”ƒRƒA
+//AYATEMPLATE.MouseMoveWheelFunc‚Ì2”Ô–Ú‚Ì”Žš‚ªuŠ´“xv‚Å‚·B
+//1”Ô–Ú‚Ì”Žši0‚©1j‚ÍAMove‚©Wheel‚©‚ð”»•Ê‚·‚é‚½‚ß‚Ì‚à‚Ì‚ÅA
+//•ÏX‚Ì•K—v‚Í‚ ‚è‚Ü‚¹‚ñB
+//******************************************************************************
+
+OnMouseMove
+{
+	AYATEMPLATE.MouseMoveWheelFunc(0,50,'MouseMove')
+}
+
+OnMouseWheel
+{
+	_result = ''
+	if TOINT(reference[2]) > 0 {
+		_result = AYATEMPLATE.MouseMoveWheelFunc(1,4,'MouseWheelUp')
+	}
+	else {
+		_result = AYATEMPLATE.MouseMoveWheelFunc(1,4,'MouseWheelDown')
+	}
+	
+	if _result == '' {
+		_result = AYATEMPLATE.MouseMoveWheelFunc(1,4,'MouseWheel')
+	}
+	
+	_result
+}
+
+OnMouseDoubleClick
+{
+	AYATEMPLATE.MouseEventExec('MouseDoubleClick');
+}

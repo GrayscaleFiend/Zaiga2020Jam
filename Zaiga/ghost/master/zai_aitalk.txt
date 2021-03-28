@@ -1,0 +1,286 @@
+//******************************************************************************
+// YAYAÅ@Ghost template
+// talk dictionary
+//******************************************************************************
+
+
+//******************************************************************************
+// Random talk
+//******************************************************************************
+
+
+RandomTalk
+{
+    TOSTR(EVAL(CHR(0x22)+RandomTalkEx()+CHR(0x22)))
+}
+
+//------------------------------------------------------------------------------
+// Random talk body: Please write the random talk in this
+// Always write in '' only here.
+// Because% () is expanded in the contents of RandomTalk above, it is OK without using "".
+// High-speed measures
+//------------------------------------------------------------------------------
+RandomTalkEx : nonoverlap
+{
+	//Of course Zaiga is talking. She's the only one. So, \0.
+	"\0"
+	--
+	--
+	if donotdisturb == 0{
+		//0 is an effective false, and 1 is true. 
+		if asleep == 1{
+			"\s[0]Zzzzzzzzzzzz...\e"
+			"\s[0]*(She's sleeping.)\e"
+			if affection < 0{
+				"\s[0]*(She's restless.)\e"
+			}else{
+				"\s[0]*(She's sleeping peacefully.)\e"
+			}
+		}else{
+			if affection > AFFECTIONCAP/10{
+				"\s[CALM]*(She seems to be a little more relaxed around you than she was before.)\e"
+				"\s[CALM]*(She might be humming, but itÅfs so quiet you can barely tell.)\e"
+				"\i[8]I wonder if theyÅfre worried about me back at home..\e"
+				"*( She gives a look around your computer. It seems like sheÅfs curious.)\e"
+				"\s[CALM]\i[8]*(SheÅfs talking to herself...)\n\nI should ask if he wants me to watch them again sometime..\e"
+				"*(You can hear her muttering to herself...\w4You catch something about puzzles and children.)\e"
+				
+				if cameragiven == 1{
+					"*(SheÅfs talking to herself.)\n\nThose pictures turned out well..\e"
+					"*(SheÅfs muttering about the camera. It seems to bring her some level of comfort.)\e"
+				}
+			
+			}
+			if affection < 0{
+				"\s[ANNOYED]Do you treat everyone you meet this way?\e"
+				"\s[ANNOYED]\i[10]*(She shoots you an annoyed glare, but says nothing.)\e"
+				"\s[ANNOYED]You should really let me go home if youÅfre going to treat me like this. If you donÅft like my company so much you make an effort to get on my nerves, you clearly donÅft want me here.\e"
+				"*(She lets out a frustrated grumble, then a sigh.)\e"
+				"Does rude behaviour come naturally to you, or have you decided IÅfm a special subject for your torment?\e"
+				"\s[ANNOYED]\i[10]*(SheÅfs scowling and muttering something.\w4 ItÅfs probably about the way you treated her.)\e"
+			}else{ 	
+				//if she's not annoyed, she's calm or neutral.
+				"*(SheÅfs not paying too much attention to you.)\e"
+				"Why have you brought me here?\e"
+				"\s[0]*(It doesnÅft seem like she wants to say anything.)\e"
+				"\i[8]*(She gives you a wary look.)\e"
+				"*(She looks a bit tense about her current situation.)\e"
+				"We both have better things to do than this, wouldnÅft you agree?\e"
+				"\s[0]\i[8]DonÅft you have better things to do then hold me captive here?\e"
+				
+				//if cigarettesthishour > 1{
+				//	"\0*(She lights up one of the cigarettes you gave her with magic.)\e"
+				//	"\0*(She pulls out a cigarette and lights it up.)\e"
+				//}
+			}
+		}
+	}else{
+		"\e"
+	}
+	
+
+}
+
+
+//******************************************************************************
+//Key pressed
+//******************************************************************************
+/*
+//------------------------------------------------------------------------------
+//OnKeyPressÉCÉxÉìÉg
+//------------------------------------------------------------------------------
+// This event fires when any key on the keyboard is pressed.
+// When specifying the function key, specify "f1" etc.
+// The pressed key is stored in reference0.
+//It is better to branch with // if statement or case ~ when statement.
+*/
+
+OnKeyPress
+{
+	case reference0 {
+		when "t" {
+			'\![raise,OnAiTalk]'
+		}
+		when "r" {
+			'\![reload,shiori](RELOAD SHIORI)'
+		}
+		when "m" {
+			if ISFUNC('OpenMenu') {
+				OpenMenu
+			}
+			else {
+				'\![raise,OnMouseDoubleClick,0,0,0,0,__SYSTEM_KEYDOWN_COL,0,mouse]'
+			}
+		}
+	}
+}
+
+//******************************************************************************
+//Time signal / overlap
+//******************************************************************************
+
+//------------------------------------------------------------------------------
+//OnMinuteChange events
+//------------------------------------------------------------------------------
+
+OnMinuteChange
+{
+
+	timeup+=1
+	
+	if donotdisturb == 0{
+
+		//---- If the time is 0, the time signal is 0. Otherwise, perform overlap processing
+		//---- Minute = 0, so time signal
+		if minute == 0
+		{
+			cigarettesthishour = 0
+			--
+			//Affection cap.
+			if affection > 200{
+				affection = 200
+			}
+			--
+			//---- Speak more at specific times (eg, noon)
+			if affection > -2{
+				if hour == 0
+				{
+					"\0Ah, itÅfs midnight."
+				}
+				elseif hour == 1
+				{
+					"\0These small hours in the morning were always my favourite.. The world gets so quiet and still."
+				}elseif hour == 2{
+					"\0\s[2]ItÅfs 2 in the morning. IÅfd be using this time to work or relax under normal circumstances, but I canÅft do that right now, obviously."
+				}elseif hour == 3{
+					"\0Usually when IÅfm awake until three in the morning, itÅfs on my own terms, not someone elseÅfs. What are you doing out there thatÅfs keeping you up?"
+					--
+					concerned = 1
+				}elseif hour == 12{
+					"\0*(SheÅfs thinking about what she might have for lunch.)"
+				}else{
+					"\0It's %hour12."
+				}
+			}else{
+				"\0It's %hour12."
+			}
+			--
+			"\e"
+		}
+		elseif AYATEMPLATE.mikireflag == 1
+		{
+			//---- Minute! = 0, and if it's over, talk off
+			MikireTalk
+		}
+		elseif reference[2] == 1
+		{
+			//---- If the minute isn't zero, and sakura and kero are overlapping
+			//---- Mostly the process to separate the kero side
+			"\s[0]I'm overlapping the kero. The... nonexistent one. This is a bug. Please contact tech support.\1\4\e"
+		}
+	}
+	--
+	
+}
+
+
+//******************************************************************************
+//Mikire
+//******************************************************************************
+
+//------------------------------------------------------------------------------
+//OnSecondChange events
+// Executed every 1 second. Do not do heavy processing here
+// In this template, only cut-out processing is performed
+//---------------------------------------------------------------------------
+OnSecondChange
+{
+
+	if AYATEMPLATE.mikireflag == 1 && reference[1] == 0
+	{
+		//---- End
+		EndMikireTalk
+	}
+	AYATEMPLATE.mikireflag = reference[1]
+}
+
+//------------------------------------------------------------------------------
+//Incomplete
+//------------------------------------------------------------------------------
+MikireTalk
+{
+	//has to do with going partially off screen
+	//"\0\s[0]I'm out.\e"
+}
+
+//------------------------------------------------------------------------------
+//End
+//------------------------------------------------------------------------------
+EndMikireTalk
+{
+	//"\0\s[0]It returns from the end.\w8\1It looks very happy.\w8\0\n\nThat's right.\e:chain=mikirego"
+}
+
+
+//------------------------------------------------------------------------------
+// The first random talk after a closeout will be a talk related to a closeout.
+// I accomplish this with a chain
+//------------------------------------------------------------------------------
+mikirego
+{{CHAIN
+	"\0\s[0]PThe part that triggers this has been deleted, making it an error.\e"
+}}CHAIN
+
+//******************************************************************************
+// Surface restoration
+//******************************************************************************
+
+//------------------------------------------------------------------------------
+//OnSurfaceRestore events
+//------------------------------------------------------------------------------
+OnSurfaceRestore
+{
+
+	if affection < -5{
+		"\0\s[ANNOYED]\e"
+	}elseif affection > AFFECTIONCAP/10 + 8{
+		"\0\s[CALM]\e"
+	}else{
+		"\0\s[0]\e"
+	}
+}
+
+//******************************************************************************
+//translator
+//******************************************************************************
+
+//------------------------------------------------------------------------------
+//OnTranslate events
+//------------------------------------------------------------------------------
+// The simplest example. Inflection ("." Å® "Nii.").
+// Comment out so that it does not move.
+/*
+OnTranslate
+{
+	_text = reference[0]
+	_text = REPLACE(_text, "ÅB", "Ç…Ç„ÅB")
+	_text
+}
+*/
+
+//------------------------------------------------------------------------------
+//OnTranslateInternal events
+//------------------------------------------------------------------------------
+// OnTranslate goes through the main body once, YAYA Å® main body Å® YAYA,
+// OnTranslateInternal is a translation inside YAYA.
+// Therefore, it is passed to this function without changing the reference variable etc.
+// The argument is the content of the talk just before _argv [0] is passed to the body.
+// Comment out so that it does not move.
+/*
+OnTranslateInternal
+{
+	_text = _argv[0]
+	_text = REPLACE(_text, "ÅB", "Ç…Ç„ÅB")
+	_text
+}
+*/

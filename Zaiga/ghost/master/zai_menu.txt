@@ -1,0 +1,534 @@
+//******************************************************************************
+// YAYAÅ@Ghost template
+// menu processing dictionary
+//******************************************************************************
+
+//******************************************************************************
+// Develop main menu
+//
+// How to use AYATEMPLATE.MenuItem
+// first string = string to be displayed in choice
+// second string = function name executed when selected
+// 3 second character string = line feed amount / 50% increments / 100% if omitted (= \ n)
+//******************************************************************************
+#globaldefine NEUTRAL 0
+#globaldefine ANNOYED 1
+#globaldefine CALM 2
+
+#globaldefine AFFECTIONCAP 200
+
+//------------------------------------------------------------------------------
+//Main menu expansion
+//------------------------------------------------------------------------------
+OpenMenu
+{
+	donotdisturb = 0
+	--
+	if affection < 0{
+		"\0..."
+	}else{
+		"\0What do you want?"
+		"\0Hm?"
+		"\0*You have her attention."
+		"\0Yes?"
+	}
+
+	--
+	AYATEMPLATE.MenuItem("Talk about something","Menu_AITALK",200)
+	--
+	if ( STRLEN(AYATEMPLATE.LastTalk) > 10 ) {
+		AYATEMPLATE.MenuItem("What did you say?","Menu_LASTTALK")
+	}
+	--
+	"\n"
+	--
+	AYATEMPLATE.MenuItem("ACT","Menu_ACT")
+	--
+	AYATEMPLATE.MenuItem("ITEM","Act_ITEM")
+	--
+	AYATEMPLATE.MenuItem("SETTINGS","Menu_SETTINGS")
+	--
+	AYATEMPLATE.MenuItem("Nevermind...","Menu_CANCEL",150)
+}
+
+//------------------------------------------------------------------------------
+//ÉÅÉjÉÖÅ[ëIëÉ^ÉCÉÄÉAÉEÉg
+//------------------------------------------------------------------------------
+OnChoiceTimeout
+{
+	if relationship < 0{
+		"\0\s[0]*(She says nothing and looks away from you.)\e"
+	}else{
+		"\0\s[0]You done? Fine by me.\e"
+		"\0\s[0]*(SheÅfs no longer interested.)\e"
+	}
+}
+
+
+//******************************************************************************
+//Processing details of each item
+//******************************************************************************
+
+
+Menu_SETTINGS{
+	"What?\n"
+	"What is it?\n"
+	--
+	if pronounstaught == 0{
+		AYATEMPLATE.MenuItem("By the way\, my pronouns are...","Menu_PRONOUNS")
+	}else{
+		AYATEMPLATE.MenuItem("Can you use new pronouns?","Menu_PRONOUNS")
+	}
+	--
+	AYATEMPLATE.MenuItem("Change talk rate","Menu_TALKINTERVAL")
+	--
+	AYATEMPLATE.MenuItem("Don't disturb me","Menu_DnD")
+	--
+	"\n"
+	--
+	AYATEMPLATE.MenuItem("Go back.","OpenMenu")
+
+}
+//----Talk something
+Menu_AITALK
+{
+	//---- Explicitly instruct AI talk start
+	OnAiTalk
+}
+
+//---- The story I mentioned earlier
+Menu_LASTTALK
+{
+	AYATEMPLATE.LastTalk
+}
+
+
+Menu_DnD{
+	donotdisturb = 1
+	"\0Fine. Just double click when you want me to start talking again.\e"
+}
+
+
+//PRONOUNS
+
+Menu_PRONOUNS{
+	"\0\s[0]What should I refer to you as?\n"
+	--
+	AYATEMPLATE.MenuItem("he/him","Select.MASC")
+	--
+	AYATEMPLATE.MenuItem("she/her","Select.FEM")
+	--
+	if pronounstaught == 0{
+		AYATEMPLATE.MenuItem("Stay with they\, but I wanted you to know.","Select.NEUTER")
+	}else{
+		AYATEMPLATE.MenuItem("they/them","Select.NEUTER")
+	}
+	
+}
+
+Select.MASC{
+	heshethey = "he"
+	himherthem = "him"
+	hisherstheirs = "his"
+	pronounstaught = 1
+	"\0\s[0]I'll refer to you in masculine terms.\e"
+}
+
+Select.FEM{
+	heshethey = "she"
+	himherthem = "her"
+	hisherstheirs = "hers"
+	pronounstaught = 1
+	"\0\s[0]I'll refer to you in feminine terms.\e"
+}
+
+Select.NEUTER{
+	heshethey = "they"
+	himherthem = "them"
+	hisherstheirs = "theirs"
+	pronounstaught = 1
+	"\0\s[0]I'll refer to you in neutral terms.\e"
+}
+
+
+
+
+
+
+//___________       __   __          ___        __                              __          
+//\__    ___/____  |  | |  | __     |   | _____/  |_  ______________  _______  |  |   ______
+//  |    |  \__  \ |  | |  |/ /     |   |/    \   __\/ __ \_  __ \  \/ /\__  \ |  |  /  ___/
+//  |    |   / __ \|  |_|    <      |   |   |  \  | \  ___/|  | \/\   /  / __ \|  |__\___ \ 
+//  |____|  (____  /____/__|_ \     |___|___|  /__|  \___  >__|    \_/  (____  /____/____  >
+//               \/          \/              \/          \/                  \/          \/ 
+
+Menu_TALKINTERVAL
+{
+	"\0\s[0]How much should I talkÅH"
+	--
+	AYATEMPLATE.MenuItem("Every minute","Menu_TALKMAX",200)
+	--
+	AYATEMPLATE.MenuItem("Every three minutes","Menu_TALKNORMAL")
+	--
+	AYATEMPLATE.MenuItem("Every five or so minutes","Menu_TALKPOOR")
+	--
+	AYATEMPLATE.MenuItem("No more than each ten minutes","Menu_TALKRARELY")
+	--
+	if affection > 0{
+		AYATEMPLATE.MenuItem("Keep quiet, please","Menu_TALKNONE")
+	}else{
+		AYATEMPLATE.MenuItem("Just shut up","Menu_TALKNONE")
+	}
+	--
+	AYATEMPLATE.MenuItem("Go back.","OpenMenu",150)
+}
+
+
+Menu_TALKMAX
+{
+
+	aitalkinterval = 60
+	--
+	"\0\s[0]You know what? Whatever you say. I'll talk every minute.\e"
+	"\0\s[0]This is excessive.\e"
+}
+
+Menu_TALKNORMAL
+{
+	aitalkinterval = 180
+	--
+	"\0\s[0]You like a lot of noise, don't you?\e"
+	"\0\s[0]*(She sighs quietly.)\nThis is fine.\e"
+}
+
+Menu_TALKPOOR
+{
+	aitalkinterval = 305
+	--
+	"\0\s[0]Fine by me.\e"
+	"\0\s[0]Say something every five minutes? Fine.\e"
+}
+
+Menu_TALKRARELY
+{
+	aitalkinterval = 600
+	--
+	"\0\s[0]Makes sense.\e"
+	"\0\s[0]Comfortable, wouldnÅft you agree?\e"
+}
+
+Menu_TALKNONE
+{
+	aitalkinterval = 0
+	--
+	"\0\s[0]I'll be quiet.\e"
+	"\0\s[0]*(She nods and approves of your choice.)\e"
+}
+
+//---- ÉwÉbÉhÉâÉCÉì
+Menu_HEADLINECANCEL
+{
+	//---- ÉLÉÉÉìÉZÉãÇ≥ÇÍÇΩ
+	"\0\s[0]Cancelled headline.\e"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ???????????  ???????????  ??????????? 
+//???????????????????????????????????????
+//?????????????????????????  ??????????? 
+//???       ??????               ???     
+//????????????????               ???     
+//????????????????               ???     
+//????????????????               ???     
+//???       ??????               ???     
+//???       ???????????????      ???     
+//???       ????????????????     ???     
+// ?         ?  ???????????       ?      
+//   
+
+
+Menu_ACT{
+	if affection > 0{
+		"\s[0]*(She seems curious.)\n"
+	}else{
+		"*(She seems wary.)\n"
+	}	
+	--
+	AYATEMPLATE.MenuItem("WHISPER","Menu_COMMUNICATEOPEN")
+	--
+	AYATEMPLATE.MenuItem("ASK","Act_QUESTION")
+	--
+	"\n"
+	--
+	AYATEMPLATE.MenuItem("Go back.","OpenMenu")
+
+
+}  
+
+//Use items you've acquired from the void that is cmd on Zaiga. 
+Act_ITEM{
+	if affection > 0{
+		"What will you give me?\n"
+	}else{
+		"\s[1]What could you possibly give me?\n"
+	}
+	--
+	AYATEMPLATE.MenuItem("A cigarette","Act_I_CIGARETTES")
+//	--
+//	AYATEMPLATE.MenuItem("A drink","Act_I_DRINK")
+//	AYATEMPLATE.MenuItem("Something to drink","Act_I_DRINK")
+	--
+	AYATEMPLATE.MenuItem("A treat","Act_I_TREAT")
+	--
+	AYATEMPLATE.MenuItem("A toy","Act_I_TOY")
+	--
+	if cameragiven == 1{
+		AYATEMPLATE.MenuItem("Some film","Act_I_FILM")
+	}else{
+		AYATEMPLATE.MenuItem("A polaroid camera","Act_I_CAMERA")
+	}
+	--
+	AYATEMPLATE.MenuItem("Go back.","Menu_ACT")
+
+
+}
+
+Act_I_CIGARETTES{
+
+	if cigarettesthishour > 4{
+		"\s[0]*(YouÅfve already given her enough of these.)"
+		"\s[0]*(SheÅfs fidgeting a little and muttering. Maybe you shouldnÅft give her any more of these for a while.)"
+		"\s[0]*(You know she would take it even after already having as many as sheÅfs had today. You reconsider your offer.)"
+	}elseif affection > AFFECTIONCAP/10{
+		"\0\s[0]\i[8]*(She looks at the cigarette for a moment, then takes it.)"
+		"...Thank you.\n\n*(She takes it.)"
+		"\0\s[0]*(She gives a small, grateful nod before taking the cigarette.)"
+		--
+		cigarettesthishour+=1
+		giftsthissession+=1
+		affection+=1
+	}elseif affection < 0{
+		"\0\s[1]\i[10]*(You offer her a cigarette, then snatch it back when she reaches for it and laugh at her. You tell her itÅfs a bad habit.)\w8\n\n*(She says nothing and glares at you.)"
+		"\0\s[1]Are you going to smack it out of my hand?\n\n*(You say you wonÅft, but she refuses to believe you and wonÅft take it.)"
+
+
+	}else{
+		"\0\s[0]*(SheÅfs hesitant.)\n\nI shouldnÅft.. but if youÅfre offering.\w8\n\n*(She takes it.)"
+		"\0*(You ask if she wants a cigarette.)\n\nNaturally.\w8\n\n*(She takes it.)"
+		--
+		cigarettesthishour+=1
+		giftsthissession+=1
+		affection+=1
+	}
+	--
+	"\e"
+
+}
+
+Act_I_FILM{
+	"\s[0]*(You offer her a package of film for the camera you gave her.)\n\n*(She takes it without fuss.)\n\nThank you."
+	"\s[0]*(You tell her you have film for the camera if she wants it.)\nI do.\n\n*(She takes the film from you.)"
+	--
+	affection +=1
+	giftsthissession+=1
+	--
+	"\e"
+}
+
+Act_I_DRINK{
+	"\s[0]Placeholder."
+	--
+	giftsthissession+=1
+	--
+	"\e"
+
+}
+
+Act_I_TREAT{
+	if affection > AFFECTIONCAP/10{
+		"\0\s[2]\i[8]*(You show her that you have some chocolate and ask if she would like some.)\n\n*(She eyes it warily for a moment before taking it.)"
+		"\0\s[2]*(You offer her a cookie.)\n\n*(She looks at it for a moment before taking it.)\n\nThank you."
+		--
+		affection+=1
+	}else{
+		"\0\s[1]\i[10]Do you accept food from strangers? I donÅft."
+		"\0\s[1]\i[10]I donÅft accept food from strange humans I donÅft know."
+	}
+	--
+	giftsthisession+=1
+	--
+	"\e"
+
+}
+
+Act_I_CAMERA{
+
+	if affection > AFFECTIONCAP/10{
+		"\s[0]*(You offer her a camera.)\n\n*(She looks very surprised, then takes it without saying anything and puts it away.)"
+		"\s[0]*(You show her that you have a camera and say you want to give it to her.)\n\n*(She seems a bit shocked, but reaches out and takes it anyway.)\n\n...Thank you."
+		"\s[0]*(You pull a camera out to show her.)\n\n*(She gives it a long stare.)\n\n*(You ask if she wants it and hold it out.)\n\n\w8Åc\w4Please.\n\n*(She takes it and seems content.)"
+		--
+		affection += 5
+		cameragiven = 1
+		giftsthissession+=1
+		--
+		"\e"
+	}else{
+	
+		if affection < 0{
+			"\0\[1]\i[10]*(You tell her you have a camera for her, if she would do something useful for you.)\n\n*(She doesnÅft say anything, just glares at you."
+			"\0\s[1]\i[10]*(You show her the camera, then snatch it away even though she didnÅft even reach for it.)\n\n*(She doesnÅft seem to care.)"
+		
+		}else{
+			"\s[0]\i[8]\i[10]*(You ask if she wants this camera you have.)\n*(She gives it a suspicious look, then gives you the same one.)\n\w4Do you accept gifts from people you donÅft know?\e"
+			"\s[0]*(You try to offer her a camera, but she wonÅft even look at it.)\e"
+		}
+	
+	}
+	
+
+}
+Act_I_TOY{
+	if affection < 0{
+		"\0\s[1]\i[10]*(You donÅft really want to give her one of these, do you?)\e"
+		"\0\s[1]\i[10]*(You decide you donÅft actually want her to have one of these.)\e"
+		"\0\s[1]\i[10]IÅfm not accepting any kind of gift from you. Leave me alone.\e"
+	}
+	"\0\s[1]\i[10]IÅfm not a child. Why would I want a toy?"
+	--
+	affection-=1
+	--
+	"\e"
+
+}
+
+
+
+
+
+
+
+
+
+//item cig, drink, treat, camera   
+Act_QUESTION{
+	"\s[0]What is it?\n"
+	--
+	if basics == 0{
+		AYATEMPLATE.MenuItem("Tell me about yourself","Act_Q_SELF")
+	}else{
+		AYATEMPLATE.MenuItem("Gaster and sons","Act_Q_WDG")
+	
+	}
+	--
+	AYATEMPLATE.MenuItem("What are you?","Act_Q_HERSELF")
+	--
+	if affection > AFFECTIONCAP/10{
+		AYATEMPLATE.MenuItem("What's your history?","Act_Q_HIST")
+	}
+	--
+	AYATEMPLATE.MenuItem("How can you smoke a cigarette?","Act_Q_CIGS")
+	--
+	if cameragiven == 1{
+		AYATEMPLATE.MenuItem("What about the camera?","Act_Q_CAMERA")
+	}
+	--
+	"\n"
+	--
+	AYATEMPLATE.MenuItem("Go back.","Menu_ACT")
+
+}     
+
+Act_Q_HIST{
+	"\0\s[1]\i[10]My history is ..painful. I would prefer to not talk about it.\e"
+	--
+	affection-=1
+}
+
+Act_Q_WDG{
+	if affection < AFFECTIONCAP/10{
+		"\0\s[0]TheyÅfre children and heÅfs their father. I work with them.\e"
+		"\0\s[1]Why are you interested in them?\e"
+		"\0\s[1]Gaster is the Royal Scientist but you already knew that, didnÅft you? WhatÅfs the point of this question?\e"
+	}else{
+		"\0\s[0]Gaster is the Royal Scientist. I work with him and his projects on occasion, but my most important job is working with and taking care of his children. Both boys are still young, but theyÅfre showing such great progress.\e"
+		"\0\s[2]\i[10]The boys are wonderful to work with. They show such potential for what they could be.\e"
+		"\0\s[2]\i[10]Papyrus can be.. excitable, but his heart is always in the right place. He means well, but sometimes his energy can get him into..\n*(She pauses.)\w10\n..Trouble.\e"
+		"\0\s[2]Sans is very intelligent, I just wish he would talk more. HeÅfs so quiet .."
+		"\0\s[0]*(She sighs.)\nGaster works himself too hard. He needs to get more rest..\e"
+		"\0\s[0]I work with Sans and Papyrus on learning how to control their magic.. Some days they do so well and others they donÅft.. though thatÅfs how it is with them. They are still children, after all."
+	}
+}
+
+Act_Q_HERSELF{
+	if affection > AFFECTIONCAP/10{
+		"\0\s[2]IÅfm.. tired. Though, IÅfm like that most of the time so itÅfs not anything new.\e"
+		"\0\s[0]*(You ask how she can hear you if she doesnÅft have ears.)\w7\n\n*(SheÅfs confused.)\n\nWhy would you ask that? I do have ears. They just donÅft look familiar to you so you wouldnÅft recognise them as what they are.\e"
+	}else{
+		"\0\s[1]What makes you think IÅfd want to talk about myself to a stranger?\e"
+		"\0\s[0]IÅfm a monster and IÅfm made of magic. What else did you expect?\e"
+	}
+}
+
+Act_Q_SELF{
+	basics = 1
+	--
+	"\0\s[0]My name is Zaiga. I live in the Underground, like any other monster.\n\n*(She pauses.)\n\n\w8I work with the Royal Scientist and his children..\w8\n ...Why does this matter?\e"
+
+} 
+
+Act_Q_CIGS{
+	if affection > AFFECTION/10{
+		"\0\s[1]I inhale and exhale?\e"
+		"\0\s[0]*(SheÅfs sighing.)\nI have a unique arrangement of organs that allows me to smoke, even though I lack a traditional mouth.\n"
+	}else{
+		"\0\s[0]Like anyone else?\e"
+		"\0\s[1]Is this information really that important?\e"
+		"\0\s[0]*(She sighs.)\e"
+	}
+}
+
+Act_Q_CAMERA{
+	"\s[0]*(You ask if sheÅfs been using the camera you gave her.)\n*(Her only response is a subtle nod.)\e"
+	if affection > AFFECTIONCAP/10{
+		"\0\s[2]\i[10]I appreciate that you gave that to me, thank you.\e"
+		"\0\s[2]The boys are fascinated by it. I struggle to keep it away from them and they love to play with it, even though IÅfve told them many times that film is in limited supply..\e"
+		"\0\s[2]I use it to take pictures of my family, and IÅfm grateful that you gave it to me.\e"
+	
+	}
+}                     
+
+
+//---- Ç‚Ç‚ÇﬂÇ…òbÇµÇ©ÇØÇÈ
+Menu_COMMUNICATEOPEN
+{
+	"\s[0]What do you want to tell me? \![open,communicatebox]\e"
+}
+
+//---- ëºÇÃÉSÅ[ÉXÉgÇ∆òbÇ∑
+Menu_GHOSTCOMSTART
+{
+	StartCommunicate
+}
+
+//---- ÉLÉÉÉìÉZÉãÇ≥ÇÍÇΩ
+Menu_CANCEL
+{
+	"\0\s[0]You done? Fine by me.\e"
+	"\0\s[0]*(SheÅfs no longer interested.)\e"
+	if affection < 0 {
+		"\0\s[0]*(She says nothing and looks away from you.)\e"
+	}
+}
+

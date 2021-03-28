@@ -1,0 +1,158 @@
+//******************************************************************************
+// YAYA　Ghost template
+// Communicate dictionary
+//******************************************************************************
+
+
+//******************************************************************************
+//Talk from here
+//******************************************************************************
+
+//この関数は現状メニューから呼ばれます
+StartCommunicate
+{
+	// The following function looks for a ghost standing next to
+	// Call the TalkTo _ ??? function. If no one is there, random talk.
+	// It is in yaya_tmpl_util.
+	AYATEMPLATE.ExecuteTalkToTalk
+}
+
+//エミリに話しかける
+TalkTo_Emily{
+	"\0\s[0]Talking to Emily."
+}
+
+
+//Talk to others
+TalkToOther{
+	"\0\s[0]Hey there."
+}
+
+TalkToNobody{
+	"\0\s[0]No one's around."
+}
+
+
+//******************************************************************************
+//Reply because I was talked to
+//******************************************************************************
+
+//------------------------------------------------------------------------------
+//OnCommunicate events
+//------------------------------------------------------------------------------
+OnCommunicate
+{
+	if reference[0] == "user" || reference[0] == "User"
+	{
+		//---- ユーザーからの話しかけ
+		ReplyToUser
+	}
+	else
+	{
+		//---- ゴーストからの話しかけ
+		//以下の関数は、ReplyTo_??? 関数を呼び出すものです。
+		//yaya_tmpl_utilにあります。
+		AYATEMPLATE.ExecuteReplyToTalk(reference[0])
+	}
+}
+
+//------------------------------------------------------------------------------
+//ユーザーからの話しかけ
+//------------------------------------------------------------------------------
+ReplyToUser
+{
+	if "名前" _in_ reference[1] && "覚えて" _in_ reference[1]
+	{
+		//---- ユーザー名入力開始
+		"\0\s[0]いいよ、なんていう名前なの、%(username)？\e"
+		teachusername = 1
+	}
+	else
+	{
+		//---- ユーザー名入力開始以外
+		if teachusername == 1
+		{
+			//---- 直前が「名前覚えて」だったので名前を覚える
+			username = reference[1]
+			"\0\s[0]%(username)、ね。わかりました。\e"
+			teachusername = 0
+		}
+		else
+		{
+			//---- 名前覚え以外のさまざまな会話への返事
+			TalkToUser
+		}
+	}
+}
+
+//------------------------------------------------------------------------------
+//Reply to user (other than remembering name)
+//------------------------------------------------------------------------------
+TalkToUser
+{
+	if "Hello" _in_ reference[1]
+	{
+		if username != "User"{
+			"\0\s[0]Hello, %(username).\e"
+		}else{
+			"\0\s[0]Hello.\e"
+		}
+		
+	}
+	elseif "name is" _in_ reference[1] || "I'm" _in_ reference[1]|| "call me" _in_ reference[1]
+	{
+		"\![close,communicatebox]"
+		--
+		if username != "User" && username _in_ reference[1]{
+			"\0You've already told me this.\e"
+		}else{
+			"\0\s[0]Could you repeat that? What do you want me to call you?\![open,inputbox,OnNameTeach,-1]\e"
+		}
+	}
+	else
+	{
+		"\0\s[0]I didn't quite catch that. What?\e"
+	}
+}
+
+//------------------------------------------------------------------------------
+//Ghost talk
+//------------------------------------------------------------------------------
+
+//Emily spoke to me
+ReplyTo_Emily{
+	res_reference0=reference[0]	//さらに相手に話しかける
+	"\0\s[0]What's up, Emily?\e"
+}
+
+ReplyTo_Hand{
+	if "ほっく" _in_ reference[1] {
+		res_reference0=reference[0]	//さらに相手に話しかける
+		"\0\s[0]There is no such thing as recklessness.\e"
+	}else{
+		"\0\s[0]Hands off.\e"
+	}
+}
+
+
+//その他の人から話しかけられた
+ReplyToOther{
+	if "こんにちは" _in_ reference[1] || "こんばんは" _in_ reference[1]
+	{
+		res_reference0=reference[0]	//さらに相手に話しかける
+		"\0\s[0]どうも、%(res_reference0)。\1\s[10]うむ。%(reference[1])\e"
+	}
+	else
+	{
+		"\0\s[0]Yes?\e"
+	}
+}
+
+
+
+OnNameTeach{
+	username = reference[0]
+	--
+	"\0\s[0]Got it, %(username).\e"
+}
+
