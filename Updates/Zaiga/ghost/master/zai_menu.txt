@@ -489,7 +489,7 @@ Act_Q_SELF{
 } 
 
 Act_Q_CIGS{
-	if affection > AFFECTION/10{
+	if affection > AFFECTIONCAP/10{
 		"\0\s[1]I inhale and exhale?\e"
 		"\0\s[0]*(SheÅfs sighing.)\nI have a unique arrangement of organs that allows me to smoke, even though I lack a traditional mouth.\n"
 	}else{

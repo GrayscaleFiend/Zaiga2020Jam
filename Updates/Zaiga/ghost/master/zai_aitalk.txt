@@ -40,27 +40,27 @@ RandomTalkEx : nonoverlap
 			if affection > AFFECTIONCAP/10{
 				"\s[CALM]*(She seems to be a little more relaxed around you than she was before.)\e"
 				"\s[CALM]*(She might be humming, but itÅfs so quiet you can barely tell.)\e"
-				"\i[8]I wonder if theyÅfre worried about me back at home..\e"
-				"*( She gives a look around your computer. It seems like sheÅfs curious.)\e"
-				"\s[CALM]\i[8]*(SheÅfs talking to herself...)\n\nI should ask if he wants me to watch them again sometime..\e"
+				"\i[8]I wonder if theyÅ're worried about me back at home..\e"
+				"*( She gives a look around your computer. It seems like sheÅ's curious.)\e"
+				"\s[CALM]\i[8]*(SheÅ's talking to herself...)\n\nI should ask if he wants me to watch them again sometime..\e"
 				"*(You can hear her muttering to herself...\w4You catch something about puzzles and children.)\e"
 				
 				if cameragiven == 1{
-					"*(SheÅfs talking to herself.)\n\nThose pictures turned out well..\e"
-					"*(SheÅfs muttering about the camera. It seems to bring her some level of comfort.)\e"
+					"*(SheÅ's talking to herself.)\n\nThose pictures turned out well..\e"
+					"*(SheÅ's muttering about the camera. It seems to bring her some level of comfort.)\e"
 				}
 			
 			}
 			if affection < 0{
 				"\s[ANNOYED]Do you treat everyone you meet this way?\e"
 				"\s[ANNOYED]\i[10]*(She shoots you an annoyed glare, but says nothing.)\e"
-				"\s[ANNOYED]You should really let me go home if youÅfre going to treat me like this. If you donÅft like my company so much you make an effort to get on my nerves, you clearly donÅft want me here.\e"
+				"\s[ANNOYED]You should really let me go home if youÅfre going to treat me like this. If you donÅ't like my company so much you make an effort to get on my nerves, you clearly donÅft want me here.\e"
 				"*(She lets out a frustrated grumble, then a sigh.)\e"
-				"Does rude behaviour come naturally to you, or have you decided IÅfm a special subject for your torment?\e"
-				"\s[ANNOYED]\i[10]*(SheÅfs scowling and muttering something.\w4 ItÅfs probably about the way you treated her.)\e"
+				"Does rude behaviour come naturally to you, or have you decided IÅ'm a special subject for your torment?\e"
+				"\s[ANNOYED]\i[10]*(SheÅfs scowling and muttering something.\w4 ItÅ's probably about the way you treated her.)\e"
 			}else{ 	
 				//if she's not annoyed, she's calm or neutral.
-				"*(SheÅfs not paying too much attention to you.)\e"
+				"*(SheÅ's not paying too much attention to you.)\e"
 				"Why have you brought me here?\e"
 				"\s[0]*(It doesnÅft seem like she wants to say anything.)\e"
 				"\i[8]*(She gives you a wary look.)\e"
@@ -145,19 +145,19 @@ OnMinuteChange
 			if affection > -2{
 				if hour == 0
 				{
-					"\0Ah, itÅfs midnight."
+					"\0Ah, itÅ's midnight."
 				}
 				elseif hour == 1
 				{
 					"\0These small hours in the morning were always my favourite.. The world gets so quiet and still."
 				}elseif hour == 2{
-					"\0\s[2]ItÅfs 2 in the morning. IÅfd be using this time to work or relax under normal circumstances, but I canÅft do that right now, obviously."
+					"\0\s[2]ItÅ's 2 in the morning. IÅ'd be using this time to work or relax under normal circumstances, but I canÅft do that right now, obviously."
 				}elseif hour == 3{
-					"\0Usually when IÅfm awake until three in the morning, itÅfs on my own terms, not someone elseÅfs. What are you doing out there thatÅfs keeping you up?"
+					"\0Usually when IÅfm awake until three in the morning, itÅ's on my own terms, not someone elseÅfs. What are you doing out there thatÅfs keeping you up?"
 					--
 					concerned = 1
 				}elseif hour == 12{
-					"\0*(SheÅfs thinking about what she might have for lunch.)"
+					"\0*(SheÅ's thinking about what she might have for lunch.)"
 				}else{
 					"\0It's %hour12."
 				}
@@ -176,7 +176,7 @@ OnMinuteChange
 		{
 			//---- If the minute isn't zero, and sakura and kero are overlapping
 			//---- Mostly the process to separate the kero side
-			"\s[0]I'm overlapping the kero. The... nonexistent one. This is a bug. Please contact tech support.\1\4\e"
+			"\s[1000]I'm overlapping the kero. The... nonexistent one. This is a bug. Please contact tech support.\1\4\e"
 		}
 	}
 	--
@@ -210,7 +210,7 @@ OnSecondChange
 MikireTalk
 {
 	//has to do with going partially off screen
-	//"\0\s[0]I'm out.\e"
+	"\0\s[0]I'm out.\e"
 }
 
 //------------------------------------------------------------------------------
@@ -218,7 +218,7 @@ MikireTalk
 //------------------------------------------------------------------------------
 EndMikireTalk
 {
-	//"\0\s[0]It returns from the end.\w8\1It looks very happy.\w8\0\n\nThat's right.\e:chain=mikirego"
+	"\0\s[0]It returns from the end.\w8\1It looks very happy.\w8\0\n\nThat's right.\e:chain=mikirego"
 }
 
 
@@ -228,7 +228,7 @@ EndMikireTalk
 //------------------------------------------------------------------------------
 mikirego
 {{CHAIN
-	"\0\s[0]PThe part that triggers this has been deleted, making it an error.\e"
+	"\0\s[0]The part that triggers this has been deleted, making it an error.\e"
 }}CHAIN
 
 //******************************************************************************
