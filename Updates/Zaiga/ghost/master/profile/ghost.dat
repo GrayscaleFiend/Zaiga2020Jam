@@ -7,11 +7,11 @@ scriptbox.left,2336
 shiori.lognotify,0
 shiori.debugnotify,0
 Char3.center,955
-Char.VirtualDesktop,113c68da-8fb8-4e8b-9bbc-28d3b737cdb1
+Char.VirtualDesktop,cba901df-03e0-4c23-befd-fc33ec8e0837
 seriko.waitmultiplier,100
 Update.TestMode,0
 scriptbox.top,469
-Char0.center,3246
+Char0.center,3239
 FirstBoot,booted
 shell,shell\master\
 Char1.center,3018

@@ -17,7 +17,7 @@ On_username
 //------------------------------------------------------------------------------
 On_homeurl
 {
-	"https://github.com/GrayscaleFiend/Zaiga2020Jam/tree/main/Zaiga"
+	"https://raw.githubusercontent.com/GrayscaleFiend/Zaiga2020Jam/tree/main/Updates/Zaiga/"
 }
 
 //------------------------------------------------------------------------------
