@@ -1,6 +1,9 @@
 Charset,UTF-8
 install,639100176
+homeurl_found,1
 surfacecount,34
+homeurl,https://raw.githubusercontent.com/GrayscaleFiend/Zaiga2020Jam/master/Updates/Zaiga/
+update_result,OK(0)
 firstboot,639100333
 commitmemorysize,3093409
-lastboot,670363099
+lastboot,670479504

@@ -42,7 +42,7 @@ RandomTalkEx : nonoverlap
 				"\s[CALM]*(She might be humming, but itÅfs so quiet you can barely tell.)\e"
 				"\i[8]I wonder if theyÅ're worried about me back at home..\e"
 				"*( She gives a look around your computer. It seems like sheÅ's curious.)\e"
-				"\s[CALM]\i[8]*(SheÅ's talking to herself...)\n\nI should ask if he wants me to watch them again sometime..\e"
+				"\s[CALM]\i[8]*(She's talking to herself...)\n\nI should ask if he wants me to watch them again sometime..\e"
 				"*(You can hear her muttering to herself...\w4You catch something about puzzles and children.)\e"
 				
 				if cameragiven == 1{
@@ -54,19 +54,19 @@ RandomTalkEx : nonoverlap
 			if affection < 0{
 				"\s[ANNOYED]Do you treat everyone you meet this way?\e"
 				"\s[ANNOYED]\i[10]*(She shoots you an annoyed glare, but says nothing.)\e"
-				"\s[ANNOYED]You should really let me go home if youÅfre going to treat me like this. If you donÅ't like my company so much you make an effort to get on my nerves, you clearly donÅft want me here.\e"
+				"\s[ANNOYED]You should really let me go home if youÅ're going to treat me like this. If you donÅ't like my company so much you make an effort to get on my nerves, you clearly donÅ't want me here.\e"
 				"*(She lets out a frustrated grumble, then a sigh.)\e"
 				"Does rude behaviour come naturally to you, or have you decided IÅ'm a special subject for your torment?\e"
-				"\s[ANNOYED]\i[10]*(SheÅfs scowling and muttering something.\w4 ItÅ's probably about the way you treated her.)\e"
+				"\s[ANNOYED]\i[10]*(SheÅ's scowling and muttering something.\w4 ItÅ's probably about the way you treated her.)\e"
 			}else{ 	
 				//if she's not annoyed, she's calm or neutral.
 				"*(SheÅ's not paying too much attention to you.)\e"
 				"Why have you brought me here?\e"
-				"\s[0]*(It doesnÅft seem like she wants to say anything.)\e"
+				"\s[0]*(It doesnÅ't seem like she wants to say anything.)\e"
 				"\i[8]*(She gives you a wary look.)\e"
 				"*(She looks a bit tense about her current situation.)\e"
-				"We both have better things to do than this, wouldnÅft you agree?\e"
-				"\s[0]\i[8]DonÅft you have better things to do then hold me captive here?\e"
+				"We both have better things to do than this, wouldnÅ't you agree?\e"
+				"\s[0]\i[8]DonÅ't you have better things to do then hold me captive here?\e"
 				
 				//if cigarettesthishour > 1{
 				//	"\0*(She lights up one of the cigarettes you gave her with magic.)\e"
@@ -102,7 +102,7 @@ OnKeyPress
 			'\![raise,OnAiTalk]'
 		}
 		when "r" {
-			'\![reload,shiori](RELOAD SHIORI)'
+			'\![reload,shiori](CHECKING THE BALANCE OF THE UNIVERSE)'
 		}
 		when "m" {
 			if ISFUNC('OpenMenu') {
@@ -151,9 +151,9 @@ OnMinuteChange
 				{
 					"\0These small hours in the morning were always my favourite.. The world gets so quiet and still."
 				}elseif hour == 2{
-					"\0\s[2]ItÅ's 2 in the morning. IÅ'd be using this time to work or relax under normal circumstances, but I canÅft do that right now, obviously."
+					"\0\s[2]ItÅ's 2 in the morning. IÅ'd be using this time to work or relax under normal circumstances, but I canÅ't do that right now, obviously."
 				}elseif hour == 3{
-					"\0Usually when IÅfm awake until three in the morning, itÅ's on my own terms, not someone elseÅfs. What are you doing out there thatÅfs keeping you up?"
+					"\0Usually when IÅ'm awake until three in the morning, itÅ's on my own terms, not someone elseÅ's. What are you doing out there thatÅ's keeping you up?"
 					--
 					concerned = 1
 				}elseif hour == 12{
@@ -210,7 +210,7 @@ OnSecondChange
 MikireTalk
 {
 	//has to do with going partially off screen
-	"\0\s[0]I'm out.\e"
+	"\0\s[0]I'm off screen.\e"
 }
 
 //------------------------------------------------------------------------------

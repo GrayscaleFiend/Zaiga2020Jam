@@ -11,11 +11,12 @@ Char.VirtualDesktop,cba901df-03e0-4c23-befd-fc33ec8e0837
 seriko.waitmultiplier,100
 Update.TestMode,0
 scriptbox.top,469
-Char0.center,3239
+Char0.center,3429
 FirstBoot,booted
 shell,shell\master\
 Char1.center,3018
 shiori.log,0
 shell.ischanged.2,1
+update.lastexec,670365015
 communicatebox.top,431
 __system_written_flag_do_not_remove__,written

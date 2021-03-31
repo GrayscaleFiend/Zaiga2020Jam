@@ -1,3 +1,5 @@
+//this is a bonus line to force Zaiga to update for testing purposes. :)
+
 //******************************************************************************
 // YAYA　ゴーストテンプレート
 // 種々のイベント辞書
@@ -238,8 +240,7 @@ OnUpdateComplete
 	if reference[0] == "none"
 	{
 		//---- 更新すべきファイルが無かった
-		"\0\s[0]Oh, there's nothing new.\e"
-		"\0\s[0]Nothing new.\e"
+		"\0\s[0]Sorry, I can't do that.\e"
 	}
 	else
 	{
@@ -266,10 +267,10 @@ OnUpdateFailure
 	else
 	{
 		//---- 上記以外の理由で失敗した
-		"\0\s[0]%(reference[0]) error."
+		"\0\s[0]%(reference[0]) kind of issue."
 	}
 	--
-	"\n\n\0That's why it failed.\e"
+	"\n\n\0 That's why it failed.\e"
 }
 
 //------------------------------------------------------------------------------
