@@ -25,12 +25,12 @@ OpenMenu
 	donotdisturb = 0
 	--
 	if affection < 0{
-		"\0..."
+		"\0\b2..."
 	}else{
-		"\0What do you want?"
-		"\0Hm?"
-		"\0*You have her attention."
-		"\0Yes?"
+		"\0\b2What do you want?"
+		"\0\b2Hm?"
+		"\0\b2*You have her attention."
+		"\0\b2Yes?"
 	}
 
 	--
@@ -71,8 +71,8 @@ OnChoiceTimeout
 
 
 Menu_SETTINGS{
-	"What?\n"
-	"What is it?\n"
+	"\b1What?\n"
+	"\b1What is it?\n"
 	--
 	if pronounstaught == 0{
 		AYATEMPLATE.MenuItem("By the way\, my pronouns are...","Menu_PRONOUNS")
@@ -105,14 +105,14 @@ Menu_LASTTALK
 
 Menu_DnD{
 	donotdisturb = 1
-	"\0Fine. Just double click when you want me to start talking again.\e"
+	"\0\b1Fine. Just double click when you want me to start talking again.\e"
 }
 
 
 //PRONOUNS
 
 Menu_PRONOUNS{
-	"\0\s[0]What should I refer to you as?\n"
+	"\0\s[0]\b1What should I refer to you as?\n"
 	--
 	AYATEMPLATE.MenuItem("he/him","Select.MASC")
 	--
@@ -164,7 +164,7 @@ Select.NEUTER{
 
 Menu_TALKINTERVAL
 {
-	"\0\s[0]How much should I talk？"
+	"\0\s[0]\b1How much should I talk？"
 	--
 	AYATEMPLATE.MenuItem("Every minute","Menu_TALKMAX",200)
 	--
@@ -229,7 +229,7 @@ Menu_TALKNONE
 Menu_HEADLINECANCEL
 {
 	//---- キャンセルされた
-	"\0\s[0]Cancelled headline.\e"
+	"\0\s[0]\b1Cancelled headline.\e"
 }
 
 
@@ -260,9 +260,9 @@ Menu_HEADLINECANCEL
 
 Menu_ACT{
 	if affection > 0{
-		"\s[0]*(She seems curious.)\n"
+		"\s[0]\b1*(She seems curious.)\n"
 	}else{
-		"*(She seems wary.)\n"
+		"\b1*(She seems wary.)\n"
 	}	
 	--
 	AYATEMPLATE.MenuItem("WHISPER","Menu_COMMUNICATEOPEN")
@@ -279,9 +279,9 @@ Menu_ACT{
 //Use items you've acquired from the void that is cmd on Zaiga. 
 Act_ITEM{
 	if affection > 0{
-		"What will you give me?\n"
+		"\b1What will you give me?\n"
 	}else{
-		"\s[1]What could you possibly give me?\n"
+		"\s[1]\b1What could you possibly give me?\n"
 	}
 	--
 	AYATEMPLATE.MenuItem("A cigarette","Act_I_CIGARETTES")
@@ -423,7 +423,7 @@ Act_I_TOY{
 
 //item cig, drink, treat, camera   
 Act_QUESTION{
-	"\s[0]What is it?\n"
+	"\s[0]\b1 is it?\n"
 	--
 	if basics == 0{
 		AYATEMPLATE.MenuItem("Tell me about yourself","Act_Q_SELF")
@@ -451,7 +451,7 @@ Act_QUESTION{
 }     
 
 Act_Q_HIST{
-	"\0\s[1]\i[10]My history is ..painful. I would prefer to not talk about it.\e"
+	"\0\s[1]\i[10]\b1My history is ..painful. I would prefer to not talk about it.\e"
 	--
 	affection-=1
 }
@@ -513,7 +513,7 @@ Act_Q_CAMERA{
 //---- ややめに話しかける
 Menu_COMMUNICATEOPEN
 {
-	"\s[0]What do you want to tell me? \![open,communicatebox]\e"
+	"\s[0]\b1What do you want to tell me? \![open,communicatebox]\e"
 }
 
 //---- 他のゴーストと話す
@@ -525,10 +525,10 @@ Menu_GHOSTCOMSTART
 //---- キャンセルされた
 Menu_CANCEL
 {
-	"\0\s[0]You done? Fine by me.\e"
-	"\0\s[0]*(She’s no longer interested.)\e"
+	"\0\s[0]\b1You done? Fine by me.\e"
+	"\0\s[0]\b1*(She’s no longer interested.)\e"
 	if affection < 0 {
-		"\0\s[0]*(She says nothing and looks away from you.)\e"
+		"\0\s[0]\b1*(She says nothing and looks away from you.)\e"
 	}
 }
 

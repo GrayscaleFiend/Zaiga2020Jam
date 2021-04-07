@@ -3,7 +3,7 @@ install,639100176
 homeurl_found,1
 surfacecount,34
 homeurl,https://raw.githubusercontent.com/GrayscaleFiend/Zaiga2020Jam/master/Updates/Zaiga/
-update_result,OK(0)
+update_result,NG(md5 miss:ghost/master/zai_string.txt)
 firstboot,639100333
 commitmemorysize,3093409
-lastboot,670479504
+lastboot,671088668
