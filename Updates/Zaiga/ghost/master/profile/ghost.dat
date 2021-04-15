@@ -3,15 +3,15 @@ __system_settings_version__,2
 balloon,C:\Users\ihave\Desktop\Ukagaka\Ghost Jam 2020\balloon\Galactic Gothic\
 GroupFlagOverride,noupdateauto,
 communicatebox.left,3117
-scriptbox.left,2336
+scriptbox.left,2593
 shiori.lognotify,0
 shiori.debugnotify,0
 Char3.center,955
-Char.VirtualDesktop,94f9120b-97c8-46b8-86f7-95978f56eabf
+Char.VirtualDesktop,ff71afe6-dbb7-43cd-accc-538ceac5b96b
 seriko.waitmultiplier,100
 Update.TestMode,0
-scriptbox.top,469
-Char0.center,3342
+scriptbox.top,730
+Char0.center,3409
 FirstBoot,booted
 shell,shell\master\
 Char1.center,3018

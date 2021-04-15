@@ -23,7 +23,7 @@ OnFirstBoot
 	if reference[0] == 0
 	{
 		//---- It's really the first launch.
-		"\0\s[0]Wh-What happened??\w4 Where am-\nWho are-- What is--? \n\w4…\w4…?\nAhh.. Ah. I see..\w4 Of course./e"
+		"\0\s[0]Wh-What happened??\w4 Where am-\nWho are-- What is--? \n\w4…\w4…?\nAhh.. Ah. I see..\w4 Of course.\e"
 	}
 	else
 	{
@@ -170,5 +170,5 @@ OnClose
 
 OnWindowStateRestore
 {
-	"\0\s[0]*(She has a bit of a start.)\nAh---! That was.. jarring.\e"
+	"\0\s[0]*(She has a bit of a start.)\n\nAh--! That was.. jarring.\e"
 }

@@ -460,5 +460,21 @@ OnScreenSaverStart
 //------------------------------------------------------------------------------
 OnScreenSaverEnd
 {
-	"\0\s[0}Later, screensaver.\e"
+	"\0\s[0]Later, screensaver.\e"
+	
+}
+
+
+OnZaigaSayLoremIpsum
+{
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi nullam vehicula ipsum a arcu cursus. Quisque non tellus orci ac auctor. Vulputate mi sit amet mauris commodo quis. Turpis in eu mi bibendum neque egestas congue. Placerat vestibulum lectus mauris ultrices eros in cursus turpis. Commodo viverra maecenas accumsan lacus vel facilisis. Nascetur ridiculus mus mauris vitae ultricies leo. Morbi tincidunt ornare massa eget egestas purus viverra. Amet facilisis magna etiam tempor orci eu lobortis."
+	--
+    "\n\nEget sit amet tellus cras adipiscing enim. Egestas purus viverra accumsan in nisl nisi. Ipsum a arcu cursus vitae congue mauris rhoncus. Blandit libero volutpat sed cras ornare. Ut enim blandit volutpat maecenas volutpat. Auctor augue mauris augue neque. Amet luctus venenatis lectus magna. In pellentesque massa placerat duis ultricies lacus sed turpis tincidunt. Suscipit adipiscing bibendum est ultricies integer quis auctor. Hendrerit gravida rutrum quisque non. Purus gravida quis blandit turpis cursus in hac habitasse. Fermentum iaculis eu non diam phasellus vestibulum lorem sed risus. Faucibus vitae aliquet nec ullamcorper sit amet risus. Enim facilisis gravida neque convallis. Euismod elementum nisi quis eleifend quam adipiscing vitae proin sagittis. Urna nunc id cursus metus aliquam eleifend. Nec ultrices dui sapien eget mi proin sed libero enim. Facilisi nullam vehicula ipsum a arcu cursus vitae congue. Diam maecenas sed enim ut."
+	--
+	"\n\nTempor orci eu lobortis elementum nibh tellus molestie. Sit amet mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Dignissim suspendisse in est ante. Elit duis tristique sollicitudin nibh sit amet commodo. Eu ultrices vitae auctor eu augue ut lectus. Varius sit amet mattis vulputate enim nulla aliquet porttitor. In nibh mauris cursus mattis molestie a iaculis at. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi. Cras tincidunt lobortis feugiat vivamus at augue eget. Semper auctor neque vitae tempus quam."
+	--
+	"\n\nConsequat ac felis donec et odio. Nunc mattis enim ut tellus elementum sagittis vitae. Tincidunt nunc pulvinar sapien et ligula. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi. Feugiat nibh sed pulvinar proin. Egestas dui id ornare arcu odio. Eget aliquet nibh praesent tristique magna sit amet purus. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Dolor sed viverra ipsum nunc aliquet bibendum. Hendrerit dolor magna eget est lorem ipsum. Aliquam sem fringilla ut morbi tincidunt. Malesuada pellentesque elit eget gravida. Dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu. Facilisis magna etiam tempor orci eu lobortis elementum. Aenean et tortor at risus viverra adipiscing at in tellus. Urna et pharetra pharetra massa massa ultricies. Gravida rutrum quisque non tellus orci ac. Lectus urna duis convallis convallis. Netus et malesuada fames ac turpis egestas integer eget aliquet."
+	--
+	"\n\nQuis blandit turpis cursus in hac habitasse platea dictumst quisque. Eu feugiat pretium nibh ipsum consequat nisl vel. Eu augue ut lectus arcu bibendum at varius vel. Elementum eu facilisis sed odio morbi. Non pulvinar neque laoreet suspendisse interdum consectetur. Tortor vitae purus faucibus ornare suspendisse sed nisi. Quis hendrerit dolor magna eget. Vitae aliquet nec ullamcorper sit amet risus. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Urna nec tincidunt praesent semper feugiat nibh. Suscipit adipiscing bibendum est ultricies integer quis auctor. Pellentesque pulvinar pellentesque habitant morbi tristique senectus. Feugiat nibh sed pulvinar proin. Sit amet risus nullam eget felis eget nunc. Cursus risus at ultrices mi tempus imperdiet nulla malesuada. Lobortis scelerisque fermentum dui faucibus in. Justo donec enim diam vulputate ut pharetra sit amet aliquam."
+
 }

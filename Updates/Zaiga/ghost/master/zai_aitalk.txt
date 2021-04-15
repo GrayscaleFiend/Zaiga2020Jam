@@ -20,7 +20,7 @@ RandomTalk
 // Because% () is expanded in the contents of RandomTalk above, it is OK without using "".
 // High-speed measures
 //------------------------------------------------------------------------------
-RandomTalkEx : nonoverlap
+RandomTalkEx : sequential
 {
 	//Of course Zaiga is talking. She's the only one. So, \0.
 	"\0\b1"
@@ -40,8 +40,8 @@ RandomTalkEx : nonoverlap
 			if affection > AFFECTIONCAP/10{
 				"\s[CALM]*(She seems to be a little more relaxed around you than she was before.)\e"
 				"\s[CALM]*(She might be humming, but it's so quiet you can barely tell.)\e"
-				"\i[8]I wonder if theyÅ're worried about me back at home..\e"
-				"*( She gives a look around your computer. It seems like sheÅ's curious.)\e"
+				"\i[8]I wonder if they're worried about me back at home..\e"
+				"*( She gives a look around your computer. It seems like she's curious.)\e"
 				"\s[CALM]\i[8]*(She's talking to herself...)\n\nI should ask if he wants me to watch them again sometime..\e"
 				"*(You can hear her muttering to herself...\w4You catch something about puzzles and children.)\e"
 				
@@ -54,19 +54,19 @@ RandomTalkEx : nonoverlap
 			if affection < 0{
 				"\s[ANNOYED]Do you treat everyone you meet this way?\e"
 				"\s[ANNOYED]\i[10]*(She shoots you an annoyed glare, but says nothing.)\e"
-				"\s[ANNOYED]You should really let me go home if youÅ're going to treat me like this. If you donÅ't like my company so much you make an effort to get on my nerves, you clearly donÅ't want me here.\e"
+				"\s[ANNOYED]You should really let me go home if you're going to treat me like this. If you don't like my company so much you make an effort to get on my nerves, you clearly don't want me here.\e"
 				"*(She lets out a frustrated grumble, then a sigh.)\e"
-				"Does rude behaviour come naturally to you, or have you decided IÅ'm a special subject for your torment?\e"
+				"Does rude behaviour come naturally to you, or have you decided I'm a special subject for your torment?\e"
 				"\s[ANNOYED]\i[10]*(She's scowling and muttering something.\w4 ItÅ's probably about the way you treated her.)\e"
 			}else{ 	
 				//if she's not annoyed, she's calm or neutral.
 				"*(She's not paying too much attention to you.)\e"
 				"Why have you brought me here?\e"
-				"\s[0]*(It doesnÅ't seem like she wants to say anything.)\e"
+				"\s[0]*(It doesn't seem like she wants to say anything.)\e"
 				"\i[8]*(She gives you a wary look.)\e"
 				"*(She looks a bit tense about her current situation.)\e"
-				"We both have better things to do than this, wouldnÅ't you agree?\e"
-				"\s[0]\i[8]DonÅ't you have better things to do then hold me captive here?\e"
+				"We both have better things to do than this, wouldn't you agree?\e"
+				"\s[0]\i[8]Don't you have better things to do then hold me captive here?\e"
 				
 				//if cigarettesthishour > 1{
 				//	"\0*(She lights up one of the cigarettes you gave her with magic.)\e"
@@ -210,7 +210,7 @@ OnSecondChange
 MikireTalk
 {
 	//has to do with going partially off screen
-	"\0\s[0]I'm off screen.\e"
+	"\0\s[0]*(She sighs and looks at you.) \w4\n\n I'm off the screen.\e"
 }
 
 //------------------------------------------------------------------------------
@@ -219,18 +219,10 @@ MikireTalk
 EndMikireTalk
 {
 	//note: ask sosig again for if we want this dialogue
-	"\0\s[0]Ah, back in solidity.\e:chain=mikirego"
+	"\0\s[0]Mh. Much better.\e"
 }
 
 
-//------------------------------------------------------------------------------
-// The first random talk after a closeout will be a talk related to a closeout.
-// I accomplish this with a chain
-//------------------------------------------------------------------------------
-mikirego
-{{CHAIN
-	"\0\s[0]The part that triggers this has been deleted, making it an error.\e"
-}}CHAIN
 
 //******************************************************************************
 // Surface restoration
