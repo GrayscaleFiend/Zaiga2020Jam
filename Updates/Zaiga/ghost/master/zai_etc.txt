@@ -46,25 +46,12 @@ OnInstallComplete
 	
 	"\0\s[0]"
 	--
-	if _ref0 == "shell" {
-		"shell"
-	}
-	elseif _ref0 == "ghost" {
-		"ghost"
-	}
-	elseif _ref0 == "balloon" {
-		"balloon"
-	}
-	elseif _ref0 == "plugin" {
-		"plugin"
-	}
-	--
 	if _ref0 == "ghost"{
 		"\0\s[0]Installing someone new? Does this mean IÅfm being released?"
 	}elseif _ref0 == "balloon"{
 		"\0\s[0]A new balloon? Interesting."
 	}else{
-		"%(reference[1]) installation complete.\n"
+		"%(reference[0]) installation complete.\n"
 	}
 	--
 	if basewarenameex == 'SSP' {
