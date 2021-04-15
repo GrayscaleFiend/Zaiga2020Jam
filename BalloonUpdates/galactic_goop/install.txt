@@ -1,0 +1,5 @@
+charset,Shift_JIS
+type,balloon
+name,Galactic Goop
+directory,galactic_goop
+refresh,1
